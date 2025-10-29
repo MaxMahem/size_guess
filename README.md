@@ -1,6 +1,6 @@
 # size_guess
 
-[![CI](https://github.com/MaxMahem/size_guess/workflows/CI/badge.svg)](https://github.com/MaxMahem/size_guess/actions)
+[![CI](https://github.com/MaxMahem/size_guess/workflows/CI/badge.svg)](https://github.com/MaxMahem/size_guess/actions)![GitHub License](https://img.shields.io/github/license/maxmahem/size_guess)
 
 Provides a way to get a guess of the size of an iterator. 
 
