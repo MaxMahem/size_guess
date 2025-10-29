@@ -13,16 +13,17 @@ impl<I: Iterator> SizeGuess for I {
     /// # Examples
     ///
     /// ```rust
-    /// use std::iter;
     /// use size_guess::SizeGuess;
     ///
     /// // exact size iterators will return an accurate guess
-    /// let mut iter = vec![1, 2, 3].into_iter();
-    /// assert_eq!(iter.size_guess(), 3);
+    /// let iter = 1..10;
+    /// let guess = iter.size_guess();
+    /// assert_eq!(iter, iter.len());
     ///
-    /// // iterators with no upper bound will return the lower bound which may be very large
-    /// let mut iter = iter::repeat(());
-    /// assert_eq!(iter.size_guess(), usize::MAX);
+    /// // unbounded iterators will return the lower bound, which may be very large
+    /// let iter = std::iter::repeat(());
+    /// let guess = iter.size_guess();
+    /// assert_eq!(guess, usize::MAX);
     /// ```
     fn size_guess(&self) -> usize {
         let (low, high) = self.size_hint();
@@ -36,17 +37,17 @@ mod tests {
 
     #[test]
     fn test_size_guess() {
-        let data = [1, 2, 3];
-        let guess = data.iter().size_guess();
+        let iter = 1..10;
+        let guess = iter.size_guess();
 
         // exact size iterators will return an accurate guess
-        assert_eq!(guess, data.len());
+        assert_eq!(guess, iter.len());
     }
 
     #[test]
     fn test_size_guess_unbounded() {
-        let data = [1, 2, 3];
-        let guess = data.iter().cycle().size_guess();
+        let iter = std::iter::repeat(());
+        let guess = iter.size_guess();
 
         // unbounded iterators will return the lower bound, which may be very large
         assert_eq!(guess, usize::MAX);
