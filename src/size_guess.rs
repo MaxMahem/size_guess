@@ -29,3 +29,26 @@ impl<I: Iterator> SizeGuess for I {
         high.unwrap_or(low)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::SizeGuess;
+
+    #[test]
+    fn test_size_guess() {
+        let data = [1, 2, 3];
+        let guess = data.iter().size_guess();
+
+        // exact size iterators will return an accurate guess
+        assert_eq!(guess, data.len());
+    }
+
+    #[test]
+    fn test_size_guess_unbounded() {
+        let data = [1, 2, 3];
+        let guess = data.iter().cycle().size_guess();
+
+        // unbounded iterators will return the lower bound, which may be very large
+        assert_eq!(guess, usize::MAX);
+    }
+}
