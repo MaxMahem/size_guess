@@ -18,7 +18,7 @@ impl<I: Iterator> SizeGuess for I {
     /// // exact size iterators will return an accurate guess
     /// let iter = 1..10;
     /// let guess = iter.size_guess();
-    /// assert_eq!(iter, iter.len());
+    /// assert_eq!(guess, iter.len());
     ///
     /// // unbounded iterators will return the lower bound, which may be very large
     /// let iter = std::iter::repeat(());
