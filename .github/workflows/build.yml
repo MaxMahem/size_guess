@@ -1,9 +1,9 @@
-name: CI # Continuous Integration
+name: Build # Continuous Integration
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ "master", "main" ]
   pull_request:
 
 jobs:
@@ -61,4 +61,3 @@ jobs:
         env:
           RUSTDOCFLAGS: -D warnings
         run: cargo doc --no-deps --document-private-items --all-features --workspace --examples
-
